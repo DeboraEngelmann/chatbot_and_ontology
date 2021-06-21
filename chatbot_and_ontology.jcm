@@ -1,0 +1,20 @@
+/*
+    Created by: Débora Engelmann
+	June 21, 2021
+*/
+
+mas chatbot_and_ontology {
+
+    agent sample_agent: sample_agent.asl{
+    	focus: integration, onto
+    }
+
+    
+	workspace wp{
+		artifact integration:br.pucrs.smart.IntegrationArtifact
+		artifact onto:br.pucrs.smart.ontology.mas.OntologyArtifact("src/resources/New-Bed-allocation.owl")
+	}
+	
+	platform: br.pucrs.smart.RestArtifact("--main 2181 --restPort 8080")
+}
+
