@@ -21,6 +21,7 @@ import org.semanticweb.owlapi.model.OWLDeclarationAxiom;
 import org.semanticweb.owlapi.model.OWLDocumentFormat;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
@@ -145,6 +146,10 @@ public class OwlOntoLayer {
 
     public Set<OWLNamedIndividual> getObjectPropertyValues(OWLNamedIndividual domain, OWLObjectProperty property) {
         return this.reasoner.getObjectPropertyValues(domain, (OWLObjectPropertyExpression)property).getFlattened();
+    }
+    
+    public Set<OWLLiteral> getDataPropertyValues(OWLNamedIndividual domain, OWLDataProperty property) {
+        return this.reasoner.getDataPropertyValues(domain, property);
     }
 
     public Set<OWLClass> getInstanceTypes(OWLNamedIndividual instance, boolean onlyDirectTypes) {

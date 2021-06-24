@@ -553,6 +553,9 @@
         <DataProperty IRI="#tem-idade"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#teste-string"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#Acompanhante1"/>
     </Declaration>
     <Declaration>
@@ -1677,6 +1680,11 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">21</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#teste-string"/>
+        <NamedIndividual IRI="#Paciente1"/>
+        <Literal>Testando a String do Paciente 1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#tem-idade"/>
         <NamedIndividual IRI="#Paciente2"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">13</Literal>
@@ -2476,6 +2484,10 @@
     </ObjectPropertyRange>
     <DataPropertyDomain>
         <DataProperty IRI="#tem-idade"/>
+        <Class IRI="#Pessoa"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#teste-string"/>
         <Class IRI="#Pessoa"/>
     </DataPropertyDomain>
     <DLSafeRule>

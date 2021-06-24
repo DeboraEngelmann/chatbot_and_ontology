@@ -5,6 +5,8 @@ import java.util.Set;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -46,6 +48,11 @@ public class OntoQueryLayer {
         OWLDataFactory factory = this.ontology.getOntology().getOWLOntologyManager().getOWLDataFactory();
         return factory.getOWLObjectProperty(this.ontology.getOntologyIRI() + "#" + propertyName);
     }
+    
+    private OWLDataProperty getOWLDataProperty(String propertyName) {
+        OWLDataFactory factory = this.ontology.getOntology().getOWLOntologyManager().getOWLDataFactory();
+        return factory.getOWLDataProperty(this.ontology.getOntologyIRI() + "#" + propertyName);
+    }
 
     public void addInstance(String instanceName) {
         this.ontology.addNewInstance(instanceName);
@@ -73,6 +80,11 @@ public class OntoQueryLayer {
 
     public Set<OWLNamedIndividual> getObjectPropertyValues(String domain, String propertyName) {
     	return this.ontology.getObjectPropertyValues(this.getOWLIndividual(domain), this.getOWLObjectProperty(propertyName));
+
+    }
+    
+    public Set<OWLLiteral> getDataPropertyValues(String domain, String propertyName) {
+    	return this.ontology.getDataPropertyValues(this.getOWLIndividual(domain), this.getOWLDataProperty(propertyName));
 
     }
 

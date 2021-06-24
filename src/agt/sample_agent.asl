@@ -126,6 +126,16 @@
 	.print("Getting DataProperties in ontology");
 	getDataPropertyNames(DataPropertyNames);
 	!print("DataPropertyNames",DataPropertyNames);
+
+	.print("Checking if patient Patient1 has teste-string");
+	!getDataPropertyValues("Paciente1", teste_string, Rn);
+	.print("The patient Patient1 has teste-string: ", Rn);
+	!print("DataProperty", Rn);
+	
+	.print("Checking if patient Patient1 has tem-idade");
+	!getDataPropertyValues("Paciente1", tem_idade, Rg);
+	.print("The patient Patient1 has tem-idade: ", Rg);
+	!print("DataProperty", Rg);
 	.
 
 +!print(_,[]).	
@@ -145,6 +155,9 @@
 	getObjectPropertyNames(ObjectPropertyNames);
 	.print("Adding ObjectProperties to the belief base");
 	!addToTheBeliefBase(ObjectPropertyNames);
+	getDataPropertyNames(DataProperties);
+	.print("Adding DataProperties to the belief base");
+	!addToTheBeliefBase(DataProperties);
 	.
 
 +!addToTheBeliefBase([]).	
@@ -191,6 +204,13 @@
  	: objectProperty(PropertyName,Property)
 <-
 	getObjectPropertyValues(Domain, PropertyName, Range);
+	.print("Domain: ", Domain, " PropertyName: ", PropertyName, " Range: ", Range);
+	.
+	
++!getDataPropertyValues(Domain, Property, Range)
+ 	: dataProperty(PropertyName,Property)
+<-
+	getDataPropertyValues(Domain, PropertyName, Range);
 	.print("Domain: ", Domain, " PropertyName: ", PropertyName, " Range: ", Range);
 	.
 

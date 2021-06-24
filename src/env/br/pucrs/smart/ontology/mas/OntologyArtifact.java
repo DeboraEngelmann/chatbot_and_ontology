@@ -1,11 +1,15 @@
 package br.pucrs.smart.ontology.mas;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
 //import org.semanticweb.HermiT.Reasoner;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
@@ -15,7 +19,9 @@ import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import cartago.Artifact;
 import cartago.OPERATION;
 import cartago.OpFeedbackParam;
+import jason.asSyntax.ASSyntax;
 import jason.asSyntax.Literal;
+import jason.asSyntax.Term;
 import br.pucrs.smart.ontology.OwlOntoLayer;
 
 public class OntologyArtifact extends Artifact {
@@ -122,6 +128,20 @@ public class OntologyArtifact extends Artifact {
 	}
 	
 	/**
+	 * @param domain The name of the instance which corresponds to the domain of the dataProperty.
+	 * @param propertyName Name of the dataProperty
+	 * @return A list of ({@link OWLLiteral}).
+	 */
+	@OPERATION
+	void getDataPropertyValues(String domain, String propertyName, OpFeedbackParam<List<Term>> instances) {
+		Collection<Term> terms = new LinkedList<Term>();		
+		for(OWLLiteral literal : queryEngine.getQuery().getDataPropertyValues(domain, propertyName)) {
+			terms.add(ASSyntax.createString(literal.toString().substring(1, literal.toString().indexOf('^')-1)));
+		}
+		instances.set(ASSyntax.createList(terms));
+	}
+	
+	/**
 	* @return A list of ({@link OWLClass}).
 	*/
 	@OPERATION
@@ -178,8 +198,11 @@ public class OntologyArtifact extends Artifact {
 	@OPERATION
 	void getDataPropertyNames(OpFeedbackParam<Literal[]> dataPropertyNames){
 		List<Object> names = queryEngine.getDataPropertyNames();
+		System.out.println("DataPropertyNames");
+		System.out.println(names.toString());
 		dataPropertyNames.set(names.toArray(new Literal[names.size()]));
 	}
+	
 		
 }
 
