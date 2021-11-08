@@ -8,7 +8,7 @@ By [Débora C. Engelmann](https://github.com/DeboraEngelmann)
 [Olimar Teixeira Borges](https://github.com/olimarborges), 
 [Tabajara Krausburg](https://github.com/TabajaraKrausburg), 
 [Marivaldo Vivan](https://github.com/Vivannaboa)  and
-[Rafael H. Bordini](https://github.com/rbordini) Available in [helloworld_from_jason](https://github.com/DeboraEngelmann/helloworld_from_jason).
+[Rafael H. Bordini](https://github.com/rbordini) Available in [Dial4JaCa](https://github.com/smart-pucrs/Dial4JaCa).
 
 ## This project was tested using the following versions:
 
