@@ -1,10 +1,10 @@
 /*
-	Arquivo original: https://github.com/jacamo-lang/jacamo-rest/blob/master/src/main/java/jacamo/rest/RestImpl.java
-	Alterado por: Débora Engelmann
-	03 de Maio de 2020
+	Original file: https://github.com/jacamo-lang/jacamo-rest/blob/master/src/main/java/jacamo/rest/RestImpl.java
+	Changed by: Débora Engelmann
+	May 3, 2020
 */
 
-package br.pucrs.smart;
+package br.pucrs.smart.Dial4JaCa;
 
 import javax.inject.Singleton;
 import javax.ws.rs.POST;
@@ -16,9 +16,9 @@ import org.glassfish.jersey.internal.inject.AbstractBinder;
 
 import com.google.gson.Gson;
 
-import br.pucrs.smart.interfaces.IAgent;
-import br.pucrs.smart.models.RequestDialogflow;
-import br.pucrs.smart.models.ResponseDialogflow;
+import br.pucrs.smart.Dial4JaCa.interfaces.IAgent;
+import br.pucrs.smart.Dial4JaCa.models.RequestDialogflow;
+import br.pucrs.smart.Dial4JaCa.models.ResponseDialogflow;
 
 
 @Singleton
@@ -39,12 +39,12 @@ public class RestImpl extends AbstractBinder {
 	@Path("/")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createNewAgent(String request) {
+    public Response receiveRequest(String request) {
         try {
         	RequestDialogflow requestDialogflow = gson.fromJson(request, RequestDialogflow.class);
-        	System.out.println("Agente comunicado: " +  gson.toJson(requestDialogflow)); 
+        	System.out.println("Agent communicated: " +  gson.toJson(requestDialogflow)); 
         	if (mas != null) {
-        		ResponseDialogflow responseDialogflow = mas.processarIntencao(requestDialogflow.getResponseId(),
+        		ResponseDialogflow responseDialogflow = mas.intentionProcessing(requestDialogflow.getResponseId(),
         																	  requestDialogflow.getQueryResult().getIntent().getDisplayName(),
         																	  requestDialogflow.getQueryResult().getParameters(),
         																	  requestDialogflow.getQueryResult().getOutputContexts(),
@@ -52,7 +52,7 @@ public class RestImpl extends AbstractBinder {
         		return Response.ok(gson.toJson(responseDialogflow)).build();
         	} else {
         		ResponseDialogflow responseDialogflow = new ResponseDialogflow();   
-            	responseDialogflow.setFulfillmentText("Desculpe, Não foi possível encontrar o agente Jason");
+            	responseDialogflow.setFulfillmentText("Sorry, We couldn't find the Jason agent.");
             	return Response.ok(gson.toJson(responseDialogflow)).build();
         	}
         } catch (Exception e) {

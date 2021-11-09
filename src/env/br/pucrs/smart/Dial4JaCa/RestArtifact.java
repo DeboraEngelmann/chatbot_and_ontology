@@ -1,10 +1,10 @@
 /*
-	Arquivo original: https://github.com/jacamo-lang/jacamo-rest/blob/master/src/main/java/jacamo/rest/JCMRest.java
-	Alterado por: Débora Engelmann
-	03 de Maio de 2020
+	Original file: https://github.com/jacamo-lang/jacamo-rest/blob/master/src/main/java/jacamo/rest/JCMRest.java
+	Changed by: Débora Engelmann
+	May 3, 2020
 */
 
-package br.pucrs.smart;
+package br.pucrs.smart.Dial4JaCa;
 
 
 import java.io.File;

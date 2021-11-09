@@ -5,16 +5,19 @@
 
 mas chatbot_and_ontology {
 
-    agent sample_agent: sample_agent.asl{
-    	focus: integration, onto
+    agent communication_sample_agent: communication_sample_agent.asl{
+    	focus: dial4JaCa
+    }
+    agent onto_sample_agent: onto_sample_agent.asl{
+    	focus: onto
     }
 
     
 	workspace wp{
-		artifact integration:br.pucrs.smart.IntegrationArtifact
+		artifact dial4JaCa:br.pucrs.smart.Dial4JaCa.Dial4JaCaArtifact
 		artifact onto:br.pucrs.smart.ontology.mas.OntologyArtifact("src/resources/New-Bed-allocation.owl")
 	}
 	
-	platform: br.pucrs.smart.RestArtifact("--main 2181 --restPort 8080")
+	platform: br.pucrs.smart.Dial4JaCa.RestArtifact("--main 2181 --restPort 8080")
 }
 
