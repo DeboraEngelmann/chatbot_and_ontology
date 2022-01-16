@@ -42,7 +42,7 @@ public class RestImpl extends AbstractBinder {
     public Response receiveRequest(String request) {
         try {
         	RequestDialogflow requestDialogflow = gson.fromJson(request, RequestDialogflow.class);
-        	System.out.println("Agent communicated: " +  gson.toJson(requestDialogflow)); 
+        	System.out.println("[Dial4JaCa] Agent communicated: " +  gson.toJson(requestDialogflow)); 
         	if (mas != null) {
         		ResponseDialogflow responseDialogflow = mas.intentionProcessing(requestDialogflow.getResponseId(),
         																	  requestDialogflow.getQueryResult().getIntent().getDisplayName(),

@@ -3,11 +3,15 @@ package br.pucrs.smart.ontology.mas;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
+import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
+
 import jason.asSyntax.ASSyntax;
 import jason.asSyntax.Literal;
 import jason.asSyntax.Term;
@@ -104,6 +108,24 @@ public class OntoQueryLayerLiteral {
 			System.out.println("failed to parse: "+e.getMessage());
 		}
         return annotationProperties;
+	}
+
+	public List<Object> getObjectPropertyAssertionAxioms() {
+		List<Object> axioms = new ArrayList<Object>();
+		for (OWLObjectPropertyAssertionAxiom axiom : this.ontoQuery.getOntology().getObjectPropertyAssertionAxioms()) {
+			List<?> oPAAxiomComponents = axiom.components().collect(Collectors.toList());
+			
+			String domain = oPAAxiomComponents.get(0).toString();
+			String objectPropertie = oPAAxiomComponents.get(1).toString();
+			String range = oPAAxiomComponents.get(2).toString();
+			
+			Literal l = ASSyntax.createLiteral(OntoQueryLayerLiteral.getNameForJason(objectPropertie.substring((objectPropertie.indexOf("#")+1), objectPropertie.indexOf(">"))));
+			l.addTerm(ASSyntax.createString(domain.substring((domain.indexOf("#")+1), domain.indexOf(">"))));
+			l.addTerm(ASSyntax.createString(range.substring((range.indexOf("#")+1), range.indexOf(">"))));
+			
+			axioms.add(l);
+		}
+		return axioms;
 	}
 
 	public List<Object> getIndividualNames(String conceptName) {

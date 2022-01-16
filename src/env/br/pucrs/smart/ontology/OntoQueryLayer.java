@@ -1,6 +1,7 @@
 package br.pucrs.smart.ontology;
 
 import java.io.File;
+import java.util.List;
 import java.util.Set;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -9,6 +10,7 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
+import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
@@ -81,6 +83,10 @@ public class OntoQueryLayer {
     public Set<OWLNamedIndividual> getObjectPropertyValues(String domain, String propertyName) {
     	return this.ontology.getObjectPropertyValues(this.getOWLIndividual(domain), this.getOWLObjectProperty(propertyName));
 
+    }
+    
+    public List<OWLObjectPropertyAssertionAxiom> getObjectPropertyAssertionAxioms() {
+    	return this.ontology.getObjectPropertyAssertionAxioms();
     }
     
     public Set<OWLLiteral> getDataPropertyValues(String domain, String propertyName) {
